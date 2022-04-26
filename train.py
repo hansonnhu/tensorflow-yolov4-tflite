@@ -153,7 +153,7 @@ def main(_argv):
             train_step(image_data, target)
         for image_data, target in testset:
             test_step(image_data, target)
-        model.save_weights("./checkpoints/yolov4")
+        model.save("./checkpoints/yolov4")
 
 if __name__ == '__main__':
     try:
