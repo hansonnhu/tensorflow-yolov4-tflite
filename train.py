@@ -18,7 +18,6 @@ flags.DEFINE_string('weights', './scripts/yolov4.weights', 'pretrained weights')
 flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
 
 def main(_argv):
-
     trainset = Dataset(FLAGS, is_training=True)
     testset = Dataset(FLAGS, is_training=False)
     logdir = "./data/log"

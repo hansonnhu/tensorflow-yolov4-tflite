@@ -12,14 +12,15 @@ import cv2
 import numpy as np
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
+from tensorflow.python.ops import gen_image_ops
 
 flags.DEFINE_string('framework', 'tf', '(tf, tflite, trt')
-flags.DEFINE_string('weights', './checkpoints/yolov4-416',
+flags.DEFINE_string('weights', 'H:\\我的雲端硬碟\\橡膠碳黑分析\\data\\testDataForEdgeDetection\\ISO 13345 standerImg\\CB_data\\model\\yolov4',
                     'path to weights file')
 flags.DEFINE_integer('size', 416, 'resize images to')
 flags.DEFINE_boolean('tiny', False, 'yolo or yolo-tiny')
 flags.DEFINE_string('model', 'yolov4', 'yolov3 or yolov4')
-flags.DEFINE_string('image', './data/kite.jpg', 'path to input image')
+flags.DEFINE_string('image', './data/60_CB1.png', 'path to input image')
 flags.DEFINE_string('output', 'result.png', 'path to output image')
 flags.DEFINE_float('iou', 0.45, 'iou threshold')
 flags.DEFINE_float('score', 0.25, 'score threshold')
@@ -67,7 +68,7 @@ def main(_argv):
         for key, value in pred_bbox.items():
             boxes = value[:, :, 0:4]
             pred_conf = value[:, :, 4:]
-
+    
     boxes, scores, classes, valid_detections = tf.image.combined_non_max_suppression(
         boxes=tf.reshape(boxes, (tf.shape(boxes)[0], -1, 1, 4)),
         scores=tf.reshape(
